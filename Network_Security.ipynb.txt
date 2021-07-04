@@ -1,0 +1,154 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Network Security.ipynb",
+      "provenance": [],
+      "collapsed_sections": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "rhIvXADWnGWY",
+        "outputId": "85f7b1c4-aa7e-4774-f34e-2e230e71b00c"
+      },
+      "source": [
+        "#hashcode in bytes\n",
+        "import hashlib\n",
+        "str=input (\"Enter your string:\")\n",
+        "result=hashlib.md5(str.encode())\n",
+        "print(\"The MD5 hash code of given string is:\",end=\" \")\n",
+        "print(result.digest())"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Enter your string:1\n",
+            "The MD5 hash code of given string is: b'\\xc4\\xcaB8\\xa0\\xb9#\\x82\\r\\xccP\\x9aou\\x84\\x9b'\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Ynvsw2zuo4YV",
+        "outputId": "c2e16d7b-d4f2-4c6c-f6ba-23e240cff47b"
+      },
+      "source": [
+        "#hashcode in hexabytes i.e hexadecimal\n",
+        "import hashlib\n",
+        "str=input (\"Enter your string:\")\n",
+        "result=hashlib.md5(str.encode())\n",
+        "print(\"The MD5 hash code of given string is:\",end=\" \")\n",
+        "print(result.hexdigest())"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Enter your string:Gopi\n",
+            "The MD5 hash code of given string is: 31111a181174ef264a929d112cbdb506\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "oYd3xv21pero",
+        "outputId": "56e11681-9381-4722-ac30-033ffcad75b3"
+      },
+      "source": [
+        "#hashcodes of a string of three different algorithms i.e they are sha256,sha1,sha384\n",
+        "import hashlib\n",
+        "str=input (\"Enter your string:\")\n",
+        "result1=hashlib.sha256(str.encode())\n",
+        "print(\"The sha256hash code of given string is:\",end=\" \")\n",
+        "print(result1.hexdigest())\n",
+        "result2=hashlib.sha1(str.encode())\n",
+        "print(\"The sha1hash code of given string is:\",end=\" \")\n",
+        "print(result2.hexdigest())\n",
+        "result3=hashlib.sha384(str.encode())\n",
+        "print(\"The sha384hash code of given string is:\",end=\" \")\n",
+        "print(result3.hexdigest())"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Enter your string:Gopi\n",
+            "The sha256hash code of given string is: d03ea8c9d9fe998c64b866cbef7c336b7cb46a078a0aead3a05f7f3568ad3cbd\n",
+            "The sha1hash code of given string is: 373e86eb6f12e5be275c2410a5ae9818fdcb7d9c\n",
+            "The sha384hash code of given string is: 32e364990ecd1042626dc670f5abcf44ee43485d4edfa7b8a061c81e16d78ac9937e5a11c4315230657712daeb102688\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "G7-l-UnvtmuL",
+        "outputId": "a28526af-cf09-4ec9-ab64-f8eace19216f"
+      },
+      "source": [
+        "#Adding of salting and iterations\n",
+        "import hashlib\n",
+        "import os\n",
+        " \n",
+        "salt = os.urandom(5)\n",
+        "str =input (\"Enter your string:\")\n",
+        " \n",
+        "key = hashlib.pbkdf2_hmac(\n",
+        "    'sha256', \n",
+        "    str.encode(),\n",
+        "    salt,\n",
+        "    100  \n",
+        ")\n",
+        "print(\"The hash code after salting and iterating using hmac algorithm:\")\n",
+        "print(key)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Enter your string:Gopi\n",
+            "The hash code after salting and iterating using hmac algorithm:\n",
+            "b'\\xbd\\x03\\xd5\\xf7\\x9b\\xa0\\xec\\xfd\\xec\\xf8\\xe3\\x0e\\x81\\xbc\\xb9I\\xa3\\xe4\\xd1\\xac\\xd4\\x1a\\x80J1&\\xd2\\xe4+\\n\\\\\\x80'\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
